@@ -1,0 +1,15 @@
+T001,passenger,15,4,200
+T002,freight,30,10000,coal
+T003,passenger,45,6,300
+T004,freight,60,15000,containers
+T005,passenger,20,3,180
+T006,freight,25,12000,grain
+T007,passenger,35,5,260
+T008,freight,40,13000,fuel
+T009,passenger,50,7,320
+T010,freight,10,9000,logs
+T011,passenger,30,4,220
+T012,freight,55,16000,metals
+T013,passenger,25,3,190
+T014,freight,20,11000,chemicals
+T015,passenger,60,8,400
