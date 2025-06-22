@@ -23,7 +23,7 @@ namespace practicalwork
             return this.freightType;
         }
 
-        public override string ShowInfo()
+        public override string ShowInfo() //It overrides the method from the Train class with their specific details
         {
             return $"Freight Train ID: {ID}, Status: {status}, Arrival Time: {arrivalTime}, Max Weight: {maxWeight}, Freight Type: {freightType}";
         }

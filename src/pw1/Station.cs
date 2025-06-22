@@ -1,20 +1,22 @@
 using System;
+using System.Runtime.CompilerServices;
 
 namespace practicalwork
 {
     public class Station
     {
-        private List<Train> trains;
+        private List<Train> trains; 
         private List<Platform> platforms;
 
         public Station(int numberOfPlatforms)
         {
+            //It initializes the lists
             trains = new List<Train>();
             platforms = new List<Platform>();
 
             for (int i = 1; i <= numberOfPlatforms; i++)
             {
-                platforms.Add(new Platform("P" + i));
+                platforms.Add(new Platform("P" + i)); //It creates the different platforms (P1, P2...)
             }
         }
 
@@ -22,21 +24,23 @@ namespace practicalwork
         {
             foreach (var train in trains)
             {
+                
                 if (train.GetStatus() == Status.EnRoute)
                 {
-                    train.DecreaseArrivalTime(15);
+                    train.DecreaseArrivalTime(15); //If the train is in route it decreases the arrival time 
 
                     if (train.GetArrivalTime() == 0)
                     {
+                        //When the arrival time is 0, it looks for a Free Platform
                         Platform freePlatform = platforms.FirstOrDefault(p => p.GetStatus() == PlatformStatus.Free);
 
                         if (freePlatform != null)
                         {
-                            freePlatform.AssignTrain(train);
+                            freePlatform.AssignTrain(train); //When there is a platform, it assings that train to the platform
                         }
                         else
                         {
-                            train.SetStatus(Status.Waiting);
+                            train.SetStatus(Status.Waiting); //If there is not a free platform it waits
                         }
                     }
                 }
@@ -50,7 +54,7 @@ namespace practicalwork
                     }
                 }
             }
-
+            
             foreach (var platform in platforms)
             {
                 platform.AdvanceTick();
@@ -63,19 +67,19 @@ namespace practicalwork
             Console.WriteLine("----Train Status----");
             foreach (var train in trains)
             {
-                Console.WriteLine(train.ShowInfo());
+                Console.WriteLine(train.ShowInfo()); //Shows the info from every train
             }
 
             Console.WriteLine("----Platform Status----");
             foreach (var platform in platforms)
             {
-                Console.WriteLine(platform.ShowInfo());
+                Console.WriteLine(platform.ShowInfo()); //Shows the info from every platform
             }
         }
 
         public bool AllTrainsDocked()
         {
-            return trains.All(t => t.GetStatus() == Status.Docked);
+            return trains.All(t => t.GetStatus() == Status.Docked); //It returns true if all the trains are docked
         }   
 
         public void LoadTrainsFromFile(string filePath)
@@ -88,15 +92,15 @@ namespace practicalwork
 
             try
             {
-                string[] lines = File.ReadAllLines(filePath);
+                string[] lines = File.ReadAllLines(filePath); 
 
                 foreach (string line in lines)
                 {
                     string[] parts = line.Split(',');
 
-                    string ID = parts[0];
-                    string type = parts[1].ToLower();
-                    int arrivalTime = int.Parse(parts[2]);
+                    string ID = parts[0]; //This is the ID from the train
+                    string type = parts[1].ToLower(); //This is the type of the train (Passenger or Freight)
+                    int arrivalTime = int.Parse(parts[2]); //This is de arrival time 
 
                     if (type == "passenger")
                     {
@@ -112,7 +116,7 @@ namespace practicalwork
                     }
                 }
 
-                Console.WriteLine("Trains are loaded succesfully");
+                Console.WriteLine("Trains are loaded succesfully"); 
             }
             catch(Exception ex)
             {

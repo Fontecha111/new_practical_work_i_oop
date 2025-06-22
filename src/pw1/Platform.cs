@@ -2,6 +2,7 @@ using System;
 
 namespace practicalwork
 {
+    //Enum for the different Platform status
     public enum PlatformStatus
     {
         Free,
@@ -45,35 +46,38 @@ namespace practicalwork
 
         public void AssignTrain(Train train)
         {
-            this.currentTrain = train;
-            this.status = PlatformStatus.Occupied;
+            this.currentTrain = train; //It assigns the train 
+            this.status = PlatformStatus.Occupied; //Changes the status of the platform to occupied 
             this.dockingTime = 2;
-            train.SetStatus(Status.Docking);
+            train.SetStatus(Status.Docking); 
         }
 
         public void AdvanceTick()
         {
+            //If the platform is occupied and there is still docking time
             if (status == PlatformStatus.Occupied && dockingTime > 0)
             {
                 dockingTime--;
                 if (dockingTime == 0)
                 {
-                    currentTrain.SetStatus(Status.Docked);
+                    currentTrain.SetStatus(Status.Docked); //Changes the train status to Docked
                 }
             }
         }
 
         public void FreePlatform()
         {
+            //If the train is already docked and there is no docking time left
             if (dockingTime == 0 && currentTrain != null && currentTrain.GetStatus() == Status.Docked)
             {
-                currentTrain = null;
-                status = PlatformStatus.Free;
+                currentTrain = null; //It frees the platform
+                status = PlatformStatus.Free; //Changes the status of the platform to Free
             }
         }
 
         public string ShowInfo()
         {
+            //It shows the platform status when it is free or when it is occupied 
             if (status == PlatformStatus.Free)
             {
                 return $"Platform {ID}: Free";

@@ -22,7 +22,7 @@ namespace practicalwork
             this.ID = ID;
             this.arrivalTime = arrivalTime;
             this.type = type;
-            this.status = Status.EnRoute;
+            this.status = Status.EnRoute; //Initially it sets the status of the trains in EnRoute
         }
 
 
@@ -51,12 +51,12 @@ namespace practicalwork
             status = newStatus;
         }
 
-        public virtual string ShowInfo()
+        public virtual string ShowInfo() //Shows the info of the trains
         {
             return $"Train ID: {ID}, Type: {type}, Status: {status}, Arrival Time: {arrivalTime}";
         }
 
-        public void DecreaseArrivalTime(int minutes)
+        public void DecreaseArrivalTime(int minutes) 
         {
             arrivalTime = Math.Max(0, arrivalTime - minutes);
         }

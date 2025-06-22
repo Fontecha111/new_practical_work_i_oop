@@ -23,7 +23,7 @@ namespace practicalwork
             return this.capacity;
         }
 
-        public override string ShowInfo()
+        public override string ShowInfo() //It overrides the method from the Train class with their specific details
         {
             return $"Passenger Train ID: {ID}, Status: {status}, Arrival Time: {arrivalTime}, Carriages: {numberOfCarriages}, Capacity: {capacity}";
         }
