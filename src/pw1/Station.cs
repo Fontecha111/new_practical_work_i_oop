@@ -80,7 +80,44 @@ namespace practicalwork
 
         public void LoadTrainsFromFile(string filePath)
         {
-            
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine("The file was not found.");
+                return;
+            }
+
+            try
+            {
+                string[] lines = File.ReadAllLines(filePath);
+
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split(',');
+
+                    string ID = parts[0];
+                    string type = parts[1].ToLower();
+                    int arrivalTime = int.Parse(parts[2]);
+
+                    if (type == "passenger")
+                    {
+                        int numberOfCarriages = int.Parse(parts[3]);
+                        int capacity = int.Parse(parts[4]);
+                        trains.Add(new PassengerTrain(ID, arrivalTime, numberOfCarriages, capacity));
+                    }
+                    else if (type == "freight")
+                    {
+                        int maxWeight = int.Parse(parts[3]);
+                        string freightType = parts[4];
+                        trains.Add(new FreightTrain(ID, arrivalTime, maxWeight, freightType));
+                    }
+                }
+
+                Console.WriteLine("Trains are loaded succesfully");
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Error with the file: {ex.Message}");
+            }
         }
     }
 }
